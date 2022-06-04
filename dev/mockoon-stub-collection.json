@@ -1,0 +1,92 @@
+{
+  "uuid": "1773253e-7d25-4fe4-9b10-70d31597ea9b",
+  "lastMigration": 19,
+  "name": "Mockoon stub collection",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 8085,
+  "hostname": "0.0.0.0",
+  "routes": [
+    {
+      "uuid": "a602f420-74d4-452b-aeec-f80922c11c84",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "",
+      "responses": [
+        {
+          "uuid": "59060e94-de35-461b-918b-c9458e6a146a",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "cbf6ba6a-6016-4e07-b108-e74a68bdc33a",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "test",
+      "responses": [
+        {
+          "uuid": "9875584f-68c1-442b-a69d-5b10d3ffbcf2",
+          "body": "test xDD",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ]
+}

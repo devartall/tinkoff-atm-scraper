@@ -1,0 +1,15 @@
+version: '3'
+services:
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8085:8080"
+  postgres:
+    image: postgres:11.4-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
