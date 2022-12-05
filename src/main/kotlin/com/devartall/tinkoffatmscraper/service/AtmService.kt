@@ -17,15 +17,15 @@ class AtmService(
     @Value("\${app.tcs.atm.zoom}") val zoom: Int
 ) {
 
-    fun getAtmInfo(): List<AtmDtoFilteredRs> {
-        val rq = creatAtmInfo()
-        val atmInfo = client.getAtmInfo(rq)
+    fun getFullUsdAtms(): List<AtmDtoFilteredRs> {
+        val request = createAtmInfoRequest()
+        val atmInfo = client.getAtmInfo(request)
 
         return converter.convert(atmInfo)
             .filter { it.limits.first { limitDtoRs -> limitDtoRs.currency == "USD" }.amount == 5000 }
     }
 
-    private fun creatAtmInfo(): AtmDtoRq {
+    private fun createAtmInfoRequest(): AtmDtoRq {
         val bottomLeft = BottomLeft(lat = bottomLeftLat, lng = bottomLeftLng)
         val topRight = TopRight(lat = topRightLat, lng = topRightLng)
         val bounds = Bounds(bottomLeft = bottomLeft, topRight = topRight)

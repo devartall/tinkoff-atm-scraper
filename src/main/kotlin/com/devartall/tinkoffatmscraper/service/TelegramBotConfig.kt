@@ -11,16 +11,19 @@ import com.github.kotlintelegrambot.entities.ChatId
 import com.github.kotlintelegrambot.entities.Message
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.web.client.RestTemplate
 import java.time.LocalDateTime
 
-const val TCS_BOT_TOKEN = "5153777891:AAEc6BRokhLHvW_9ekUfgRSoorkjOJpHpr0"
-
 @Configuration
-class TgBotConfig {
+class TelegramBotConfig(
+    @Value("\${app.telegram.bot.token}") val botToken: String
+) {
+
     companion object {
-        val log: Logger = LoggerFactory.getLogger(TgBotConfig::class.java)
+        val log: Logger = LoggerFactory.getLogger(TelegramBotConfig::class.java)
 
         val startMessage = """
             Привет! Для начала получения уведомлений пришли мне список id банкоматов Тинькофф, обновления которых ты хочешь получать. 
@@ -46,7 +49,7 @@ class TgBotConfig {
     @Bean
     fun tgBot(subscriptionRepo: SubscriptionRepo): Bot {
         val bot = bot {
-            token = TCS_BOT_TOKEN
+            token = botToken
             dispatch {
                 command("start") {
                     log.info("start ${message.chat.id} ${getFullName(message)}")
@@ -205,4 +208,7 @@ class TgBotConfig {
         return if (sb.isBlank()) null else sb.toString()
 
     }
+
+    @Bean
+    fun telegramRestTemplate() = RestTemplate()
 }
