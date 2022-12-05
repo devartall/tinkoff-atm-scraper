@@ -31,6 +31,7 @@ class NotificationScheduler(
         if (lastAtmInfo.isEmpty) {
             refilledAtmIds = atmIdsInfo
             lastAtmInfoRepo.save(LastAtmInfo(atmIdsInfo))
+            return
         } else {
             val lastAtmInfoPresent = lastAtmInfo.get()
             val lastAtmIdsInfo = lastAtmInfoPresent.atmIds.toSet()
@@ -44,8 +45,8 @@ class NotificationScheduler(
         if (subscriptionList.isEmpty()) return
 
         subscriptionList.forEach { subscription ->
-            val subAtmIds = (subscription.atmIds ?: emptyList()).toSet()
-            val subRefilledAtmIds = refilledAtmIds.intersect(subAtmIds)
+            val subAtmIds = if (subscription.atmIds.isNullOrEmpty()) refilledAtmIds else subscription.atmIds!!
+            val subRefilledAtmIds = refilledAtmIds.intersect(subAtmIds.toSet())
             if (subRefilledAtmIds.isNotEmpty()) {
                 telegramBotService.notifyAtmStatus(
                     subscription.chatId,

@@ -24,7 +24,7 @@ class TelegramBotService(
         uriVars["chat_id"] = chatId.toString()
         uriVars["parse_mode"] = "MarkdownV2"
         val text =
-            "Баланс пополнен\n" + refilledAtms.joinToString(separator = "\n\n") { "${it.id} ${it.address}" }
+            "Баланс пополнен:\n" + refilledAtms.joinToString(separator = "\n\n") { "ID:${it.id} Адрес:${it.address}" }
 
         val replaced = text
             .replace(".", "\\.")
