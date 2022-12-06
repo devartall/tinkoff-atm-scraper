@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.devartall</groupId>
 	<artifactId>tinkoff-atm-scraper</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	<name>tinkoff-atm-scraper</name>
 	<description>Telegram notification bot for Tinkoff ATM refill</description>
 	<properties>

@@ -35,6 +35,7 @@ class TelegramBotConfig(
             002583,002322,003057
 
             id банкоматов можно найти на сайте https://www.tinkoff.ru/maps/atm выбрав отдельный банкомат (скриншот ниже)
+            /start также обновляет список id для всех банкоматов
             
             Текущие ограничения:
             - Только пополнение USD
@@ -65,6 +66,7 @@ class TelegramBotConfig(
                             )
                         } else {
                             subscription.updatedAt = now
+                            subscription.atmIds = null
                             subscriptionRepo.save(subscription)
                         }
 
@@ -101,9 +103,15 @@ class TelegramBotConfig(
                             subscription.enabled = true
                             subscription.updatedAt = LocalDateTime.now()
                             subscriptionRepo.save(subscription)
+
+                            val text = if (subscription.atmIds.isNullOrEmpty()) {
+                                "Уведомления успешно включены"
+                            } else {
+                                "Уведомления успешно включены для id: ${subscription.atmIds}"
+                            }
                             bot.sendMessage(
                                 chatId = ChatId.fromId(message.chat.id),
-                                text = "Уведомления успешно включены для id: ${subscription.atmIds}"
+                                text = text
                             )
                         }
                     } catch (e: Exception) {
